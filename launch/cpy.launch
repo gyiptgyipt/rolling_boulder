@@ -1,0 +1,8 @@
+<launch>
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node">
+    <param name="odometry_topic" value=""/>
+    <param name="imu_topic" value="/imu/data"/>
+  </node>
+
+</launch>

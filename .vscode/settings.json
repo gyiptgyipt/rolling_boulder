@@ -1,0 +1,22 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/zyme/ros_ws/microros_ws/install/unique_identifier_msgs/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/std_srvs/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/rosidl_typesupport_microxrcedds_cpp/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/rosidl_typesupport_microxrcedds_c/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/builtin_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/zyme/ros_ws/microros_ws/install/unique_identifier_msgs/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/std_srvs/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/rosidl_typesupport_microxrcedds_cpp/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/rosidl_typesupport_microxrcedds_c/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages",
+        "/home/zyme/ros_ws/microros_ws/install/builtin_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
