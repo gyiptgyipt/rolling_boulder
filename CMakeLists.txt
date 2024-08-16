@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(death_reckoning_imu)
+project(rolling_boulder)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -62,12 +62,18 @@ ament_target_dependencies(play_time rclcpp tf2 tf2_ros sensor_msgs geometry_msgs
 
 
 
+add_executable(rolling_boulder test/test_ball.cpp)
+ament_target_dependencies(rolling_boulder rclcpp tf2 tf2_ros sensor_msgs geometry_msgs tf2_geometry_msgs nav_msgs)
+
+
+
 
 install(TARGETS
   #tf_2sensor_test
   play_time
   dis
   raw
+  rolling_boulder
   # not_sub
   # tur
   # tf_pub

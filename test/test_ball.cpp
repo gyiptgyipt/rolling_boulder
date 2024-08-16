@@ -5,6 +5,8 @@
 #include "geometry_msgs/msg/twist.hpp"
 #include "geometry_msgs/msg/pose.hpp"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
+#include "tf2_ros/transform_broadcaster.h"
+#include "geometry_msgs/msg/transform_stamped.hpp"
 
 class ImuToOdom : public rclcpp::Node
 {
@@ -13,9 +15,11 @@ public:
         : Node("imu_to_odom"), x_(0.0), y_(0.0), yaw_(0.0), vx_(0.0), vy_(0.0), vth_(0.0)
     {
         imu_subscriber_ = this->create_subscription<sensor_msgs::msg::Imu>(
-            "/imu", 10, std::bind(&ImuToOdom::imuCallback, this, std::placeholders::_1));
+            "/imu/data", 10, std::bind(&ImuToOdom::imuCallback, this, std::placeholders::_1));
 
         odom_publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/odom", 10);
+
+        tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
 
         previous_time_ = this->now();
     }
@@ -51,11 +55,26 @@ private:
         odom_msg.twist.twist.angular.z = vth_;
 
         odom_publisher_->publish(odom_msg);
+
+        // Broadcast the transform
+        geometry_msgs::msg::TransformStamped odom_transform;
+        odom_transform.header.stamp = current_time;
+        odom_transform.header.frame_id = "odom";
+        odom_transform.child_frame_id = "base_link";
+
+        odom_transform.transform.translation.x = x_;
+        odom_transform.transform.translation.y = y_;
+        odom_transform.transform.translation.z = 0.0;
+        odom_transform.transform.rotation = tf2::toMsg(q);
+
+        tf_broadcaster_->sendTransform(odom_transform);
+
         previous_time_ = current_time;
     }
 
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_subscriber_;
     rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_publisher_;
+    std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
     double x_, y_, yaw_, vx_, vy_, vth_;
     rclcpp::Time previous_time_;
